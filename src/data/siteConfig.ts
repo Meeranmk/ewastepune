@@ -3,7 +3,7 @@ export const SITE_CONFIG = {
   domain: "ewastecenterpune.online",
   phone: "93590 29457",
   formattedPhone: "+91 93590 29457",
-  whatsappNumber: "917358878713",
+  whatsappNumber: "919359029457",
   email: "contact@ewastecenterpune.online",
   address: {
     street: "Survey No. 89, Samarth Nagar Road, Hingane Mala, Ramtekadi",

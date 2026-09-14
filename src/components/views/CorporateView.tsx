@@ -186,7 +186,7 @@ _Submitted via E-Waste Center Pune Corporate Desk_`;
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900">Enquiry Forwarded to WhatsApp!</h3>
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  Thank you, <strong>{contactPerson}</strong>. Your corporate requirement for <strong>{companyName}</strong> has been auto-forwarded to our WhatsApp desk at <strong>+91 7358878713</strong>.
+                  Thank you, <strong>{contactPerson}</strong>. Your corporate requirement for <strong>{companyName}</strong> has been auto-forwarded to our WhatsApp desk at <strong>{SITE_CONFIG.formattedPhone}</strong>.
                 </p>
                 <div className="pt-2">
                   <a
@@ -195,7 +195,7 @@ _Submitted via E-Waste Center Pune Corporate Desk_`;
                     rel="noopener noreferrer"
                     className="inline-flex items-center space-x-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm rounded-xl shadow-md transition-all cursor-pointer"
                   >
-                    <span>Open WhatsApp Chat (+91 7358878713)</span>
+                    <span>Open WhatsApp Chat ({SITE_CONFIG.formattedPhone})</span>
                   </a>
                 </div>
                 <p className="text-xs text-slate-400">
