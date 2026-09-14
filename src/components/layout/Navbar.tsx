@@ -73,27 +73,25 @@ export const Navbar: React.FC<NavbarProps> = ({
       </div>
 
       {/* Main Navbar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20 gap-4">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-4">
           {/* Brand Logo */}
           <div 
             onClick={() => handleNavClick('home')}
-            className="cursor-pointer flex items-center space-x-3 shrink-0 group select-none py-1"
+            className="cursor-pointer flex items-center gap-2 sm:gap-2.5 shrink-0 group select-none py-1"
           >
-            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-[#2E7D32] to-[#1565C0] flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform shrink-0">
-              <div className="relative">
-                <Truck className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-amber-400 rounded-full border-2 border-white"></span>
-              </div>
+            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-[#2E7D32] to-[#1565C0] flex items-center justify-center text-white shadow-xs group-hover:scale-105 transition-transform shrink-0 relative">
+              <Truck className="w-4.5 h-4.5 sm:w-6 sm:h-6 text-white shrink-0 block" />
+              <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-amber-400 rounded-full border-2 border-white"></span>
             </div>
-            <div className="shrink-0 flex flex-col justify-center">
-              <div className="flex items-center space-x-1.5 whitespace-nowrap leading-tight">
-                <span className="font-extrabold text-lg sm:text-xl text-slate-900 tracking-tight">
+            <div className="shrink-0 flex flex-col justify-center min-w-0">
+              <div className="flex items-center space-x-1 whitespace-nowrap leading-tight">
+                <span className="font-extrabold text-sm sm:text-xl text-slate-900 tracking-tight">
                   E-Waste Center
                 </span>
-                <span className="text-lg sm:text-xl font-black text-[#2E7D32]">Pune</span>
+                <span className="text-sm sm:text-xl font-black text-[#2E7D32]">Pune</span>
               </div>
-              <p className="text-[11px] font-medium text-slate-500 tracking-wide whitespace-nowrap hidden 2xl:block leading-tight mt-0.5">
+              <p className="text-[10px] sm:text-[11px] font-medium text-slate-500 tracking-wide whitespace-nowrap hidden sm:block leading-tight mt-0.5">
                 Certified Scrap Buyers & Doorstep Recycling
               </p>
             </div>
@@ -127,13 +125,13 @@ export const Navbar: React.FC<NavbarProps> = ({
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center space-x-1.5 px-3.5 h-10 rounded-xl text-xs font-semibold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 transition-colors whitespace-nowrap shrink-0 shadow-2xs"
             >
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
               <span>WhatsApp</span>
             </a>
 
             <button
               onClick={onOpenPickupModal}
-              className="inline-flex items-center justify-center space-x-2 px-4 h-10 rounded-xl text-sm font-bold text-white bg-[#2E7D32] hover:bg-[#256629] shadow-sm hover:shadow-md transition-all active:scale-98 whitespace-nowrap shrink-0 cursor-pointer"
+              className="inline-flex items-center justify-center space-x-2 px-4 h-10 rounded-xl text-sm font-bold text-white bg-[#2E7D32] hover:bg-[#256629] shadow-xs hover:shadow-md transition-all active:scale-98 whitespace-nowrap shrink-0 cursor-pointer"
             >
               <Truck className="w-4 h-4 shrink-0" />
               <span>Schedule Pickup</span>
@@ -141,42 +139,50 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Mobile Menu Trigger & Quick Actions (< lg) */}
-          <div className="flex lg:hidden items-center space-x-2 shrink-0">
+          <div className="flex lg:hidden items-center gap-1.5 sm:gap-2 shrink-0">
             <a
               href={getWhatsAppLink('Hello! I would like to sell electronic scrap / schedule e-waste pickup in Pune.')}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center justify-center space-x-1.5 px-3 h-9 rounded-lg text-xs font-semibold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 transition-colors whitespace-nowrap shrink-0"
+              className="hidden md:inline-flex items-center justify-center gap-1.5 px-3 h-9 rounded-xl text-xs font-semibold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 transition-colors whitespace-nowrap shrink-0 leading-none"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 block"></span>
               <span>WhatsApp</span>
             </a>
 
+            {/* Pickup Quick Action Button */}
             <button
               onClick={onOpenPickupModal}
-              className="inline-flex items-center justify-center space-x-1.5 px-3.5 h-9 rounded-lg text-xs font-bold text-white bg-[#2E7D32] hover:bg-[#256629] shadow-xs whitespace-nowrap shrink-0 cursor-pointer"
+              className="w-9 h-9 sm:w-auto sm:px-3 h-9 rounded-xl text-xs font-bold text-white bg-[#2E7D32] hover:bg-[#256629] shadow-2xs whitespace-nowrap shrink-0 cursor-pointer active:scale-95 transition-transform flex items-center justify-center gap-1.5 border border-emerald-700/20"
+              title="Schedule E-Waste Pickup"
+              aria-label="Schedule E-Waste Pickup"
             >
-              <Truck className="w-3.5 h-3.5 shrink-0" />
-              <span className="hidden sm:inline">Schedule Pickup</span>
-              <span className="inline sm:hidden">Pickup</span>
+              <Truck className="w-4 h-4 shrink-0 block text-white" />
+              <span className="hidden sm:inline">Pickup</span>
             </button>
 
+            {/* Direct Call Button */}
             <a
               href={`tel:${SITE_CONFIG.phone.replace(/\s+/g, '')}`}
-              className="p-2 text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-lg transition-colors shrink-0"
+              className="w-9 h-9 p-0 m-0 flex items-center justify-center text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-xl border border-emerald-200/80 transition-colors shrink-0 active:scale-95"
               title="Call Us"
               aria-label="Call E-Waste Center Pune"
             >
-              <Phone className="w-4 h-4 shrink-0" />
+              <Phone className="w-4 h-4 shrink-0 block" />
             </a>
 
+            {/* Navigation Drawer Menu Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors focus:outline-none shrink-0 cursor-pointer"
+              className="w-9 h-9 p-0 m-0 flex items-center justify-center text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200/80 rounded-xl border border-slate-200/80 transition-colors focus:outline-none shrink-0 cursor-pointer active:scale-95"
               aria-label="Toggle navigation menu"
               aria-expanded={mobileMenuOpen}
             >
-              {mobileMenuOpen ? <X className="w-5 h-5 shrink-0" /> : <Menu className="w-5 h-5 shrink-0" />}
+              {mobileMenuOpen ? (
+                <X className="w-4.5 h-4.5 shrink-0 block text-slate-800" />
+              ) : (
+                <Menu className="w-4.5 h-4.5 shrink-0 block text-slate-800" />
+              )}
             </button>
           </div>
         </div>

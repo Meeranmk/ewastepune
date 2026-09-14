@@ -11,6 +11,7 @@ import { ResidentialCorporateSection } from './components/home/ResidentialCorpor
 import { DataDestructionSection } from './components/home/DataDestructionSection';
 import { SustainabilitySection } from './components/home/SustainabilitySection';
 import { PuneAreasSection } from './components/home/PuneAreasSection';
+import { PuneSEOGuideSection } from './components/home/PuneSEOGuideSection';
 import { FAQSection } from './components/home/FAQSection';
 import { FinalCTASection } from './components/home/FinalCTASection';
 import { ServicesView } from './components/views/ServicesView';
@@ -71,7 +72,7 @@ export default function App() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-    if (view === 'how-it-works' || view === 'areas' || view === 'faq') {
+    if (view === 'how-it-works' || view === 'areas' || view === 'faq' || view === 'pune-ewaste-guide') {
       if (currentView !== 'home') {
         setCurrentView('home');
         setTimeout(() => {
@@ -138,6 +139,10 @@ export default function App() {
 
             <PuneAreasSection
               onSelectAreaForPickup={handleSelectAreaFromHome}
+            />
+
+            <PuneSEOGuideSection
+              onOpenPickupModal={handleOpenPickupModal}
             />
 
             <FAQSection />

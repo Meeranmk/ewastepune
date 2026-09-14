@@ -48,14 +48,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           <div className="lg:col-span-7 text-center sm:text-left space-y-6">
             
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.15]">
-              E-Waste Recycling & <br className="hidden sm:inline" />
+              E-Waste in Pune: <br className="hidden sm:inline" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2E7D32] to-[#1565C0]">
-                Scrap Buyers in Pune
+                #1 Recycling & Scrap Buyers
               </span>
             </h1>
 
             <p className="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
-              Responsible e-waste collection, electronic scrap buying, certified recycling and legal disposal services for homes, corporate IT parks, and businesses across Pune. Get doorstep pickup and instant cash or UPI settlement.
+              Looking for certified <strong>e-waste recycling in Pune</strong>? We are Pune’s authorized electronic scrap buyers and collection center. Enjoy free doorstep pickup across Hadapsar, Hinjewadi, Kharadi, Kothrud & all Pune areas with instant digital weighing, on-the-spot UPI or cash payout, and 100% legal compliance.
             </p>
 
             {/* 4 Trust Badges from PRD Section 7 */}

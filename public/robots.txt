@@ -1,0 +1,8 @@
+# Robots.txt for E-Waste Center Pune
+# Optimized for Googlebot and all search engine crawlers
+
+User-agent: *
+Allow: /
+
+# Canonical XML Sitemap
+Sitemap: https://ewastecenterpune.online/sitemap.xml

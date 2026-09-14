@@ -89,6 +89,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenPickupModal })
                 { id: 'corporate', label: 'Corporate ITAD & Enterprise' },
                 { id: 'how-it-works', label: 'How Pickup Works' },
                 { id: 'areas', label: 'Pune Areas Covered' },
+                { id: 'pune-ewaste-guide', label: 'Pune E-Waste & Pincode Guide' },
                 { id: 'faq', label: 'Frequently Asked Questions' },
                 { id: 'contact', label: 'Contact Us & Facility Map' },
               ].map((link) => (
