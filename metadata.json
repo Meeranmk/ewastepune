@@ -1,0 +1,6 @@
+{
+  "name": "E-Waste Center Pune",
+  "description": "Responsible e-waste collection, electronic scrap buying, recycling and disposal services for homes and businesses in Pune, Maharashtra.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
