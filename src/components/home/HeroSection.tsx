@@ -118,7 +118,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
                 
                 <div className="absolute top-3 left-3 bg-emerald-600/90 text-white text-[11px] font-bold px-2.5 py-1 rounded-md backdrop-blur-xs flex items-center space-x-1.5 shadow-xs">
-                  <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-white"></span>
                   <span>Pune Doorstep Fleet Active</span>
                 </div>
 

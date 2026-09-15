@@ -20,7 +20,7 @@ export const FloatingCTA: React.FC<FloatingCTAProps> = ({ onOpenPickupModal }) =
         >
           <div className="relative">
             <MessageCircle className="w-6 h-6 fill-current text-white" />
-            <span className="absolute -top-1 -right-1 w-3 h-3 bg-amber-400 rounded-full border-2 border-white animate-pulse"></span>
+            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-amber-400 rounded-full border-2 border-white"></span>
           </div>
           <div className="text-left leading-tight">
             <span className="text-[10px] uppercase font-bold text-emerald-100 tracking-wider block">Chat With Us</span>

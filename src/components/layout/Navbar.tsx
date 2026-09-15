@@ -58,7 +58,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
           <div className="flex items-center space-x-5 shrink-0">
             <span className="text-emerald-400 font-medium flex items-center space-x-1.5 whitespace-nowrap">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+              <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0"></span>
               <span>Pune Doorstep Pickup Active</span>
             </span>
             <a 
@@ -127,7 +127,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center space-x-1.5 px-3.5 h-10 rounded-xl text-xs font-semibold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 transition-colors whitespace-nowrap shrink-0 shadow-2xs"
             >
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+              <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
               <span>WhatsApp</span>
             </a>
 
