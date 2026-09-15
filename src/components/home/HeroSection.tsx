@@ -34,7 +34,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         {/* Central Facility Location Pill */}
         <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-6">
           <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white border border-emerald-300 text-[#2E7D32] shadow-xs text-xs font-semibold">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <MapPin className="w-3.5 h-3.5 text-[#2E7D32] shrink-0" />
             <span>Pune Metropolitan Service Hub: Hadapsar (Survey No. 89, Hingane Mala)</span>
           </div>
           <span className="text-xs text-slate-500 hidden md:inline">
