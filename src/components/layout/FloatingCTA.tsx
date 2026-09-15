@@ -15,7 +15,7 @@ export const FloatingCTA: React.FC<FloatingCTAProps> = ({ onOpenPickupModal }) =
           href={getWhatsAppLink('Hi E-Waste Center Pune! I want to sell electronic scrap / schedule a pickup.')}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center space-x-2.5 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-3 rounded-full shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 group"
+          className="flex items-center space-x-2.5 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-3 rounded-full shadow-xl hover:shadow-2xl transition-[background-color,box-shadow,transform] duration-200 transform hover:-translate-y-1 group"
           aria-label="Chat on WhatsApp"
         >
           <div className="relative">

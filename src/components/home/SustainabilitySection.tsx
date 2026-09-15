@@ -55,7 +55,7 @@ export const SustainabilitySection: React.FC = () => {
           {steps.map((item, index) => (
             <div
               key={item.stage}
-              className="bg-[#F5F5F0]/70 rounded-3xl p-6 border border-slate-200 flex flex-col justify-between hover:shadow-lg transition-all"
+              className="bg-[#F5F5F0]/70 rounded-3xl p-6 border border-slate-200 flex flex-col justify-between hover:shadow-lg transition-shadow duration-200"
             >
               <div>
                 <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${item.color} text-white flex items-center justify-center font-black text-lg mb-4 shadow-sm`}>

@@ -126,8 +126,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenPickupModal })
                 'Copper Wires & Cable Scrap',
                 'EPR Extended Producer Support',
                 'Green Recycling Certificate Issuance'
-              ].map((service, index) => (
-                <li key={index} className="flex items-center space-x-1.5">
+              ].map((service) => (
+                <li key={service} className="flex items-center space-x-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                   <span>{service}</span>
                 </li>
@@ -162,9 +162,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenPickupModal })
                 'Hadapsar (HQ)', 'Magarpatta', 'Hinjewadi', 'Kharadi', 'Kothrud',
                 'Baner', 'Viman Nagar', 'Aundh', 'Wakad', 'Pimpri-Chinchwad',
                 'Swargate', 'Shivajinagar', 'Kondhwa', 'Katraj', 'Wagholi', 'Bavdhan'
-              ].map((area, i) => (
+              ].map((area) => (
                 <span 
-                  key={i} 
+                  key={area} 
                   className={`text-xs px-2 py-1 rounded-md border ${
                     area.includes('HQ') 
                       ? 'bg-emerald-950 text-emerald-300 border-emerald-800 font-semibold' 
@@ -178,7 +178,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenPickupModal })
 
             <button
               onClick={onOpenPickupModal}
-              className="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-md transition-all text-center flex items-center justify-center space-x-2"
+              className="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-md hover:shadow-lg transition-colors text-center flex items-center justify-center space-x-2 cursor-pointer"
             >
               <Truck className="w-4 h-4" />
               <span>Schedule Free Pickup in Pune</span>

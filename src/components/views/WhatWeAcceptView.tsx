@@ -59,8 +59,12 @@ export const WhatWeAcceptView: React.FC<WhatWeAcceptViewProps> = ({
         {/* Search & Filter Bar */}
         <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-xs mb-10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="relative w-full sm:w-80">
+            <label htmlFor="accept-category-search" className="sr-only">
+              Search accepted e-waste items
+            </label>
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
             <input
+              id="accept-category-search"
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -101,7 +105,7 @@ export const WhatWeAcceptView: React.FC<WhatWeAcceptViewProps> = ({
           {filteredCategories.map((cat) => (
             <div
               key={cat.id}
-              className="bg-white rounded-3xl p-6 border border-slate-200 shadow-xs hover:border-emerald-400 hover:shadow-md transition-all flex flex-col justify-between group"
+              className="bg-white rounded-3xl p-6 border border-slate-200 shadow-xs hover:border-emerald-400 hover:shadow-md transition-[border-color,box-shadow] duration-200 flex flex-col justify-between group"
             >
               <div>
                 {/* Visual Category Photo */}
@@ -137,8 +141,8 @@ export const WhatWeAcceptView: React.FC<WhatWeAcceptViewProps> = ({
                     Accepted Items:
                   </span>
                   <div className="flex flex-wrap gap-1.5">
-                    {cat.items.map((item, idx) => (
-                      <span key={idx} className="px-2 py-0.5 bg-slate-50 border border-slate-200 rounded text-[11px] text-slate-700">
+                    {cat.items.map((item) => (
+                      <span key={item} className="px-2 py-0.5 bg-slate-50 border border-slate-200 rounded text-[11px] text-slate-700">
                         {item}
                       </span>
                     ))}

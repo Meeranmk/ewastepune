@@ -41,7 +41,7 @@ export const PuneAreasSection: React.FC<PuneAreasSectionProps> = ({ onSelectArea
             <button
               key={zone}
               onClick={() => setSelectedZone(zone)}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all ${
+              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-colors cursor-pointer ${
                 selectedZone === zone
                   ? 'bg-[#2E7D32] text-white shadow-sm'
                   : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
@@ -60,10 +60,11 @@ export const PuneAreasSection: React.FC<PuneAreasSectionProps> = ({ onSelectArea
             {filteredAreas.map((loc) => {
               const isSelected = selectedArea.slug === loc.slug;
               return (
-                <div
+                <button
+                  type="button"
                   key={loc.slug}
                   onClick={() => setSelectedArea(loc)}
-                  className={`p-4 rounded-2xl border cursor-pointer transition-all ${
+                  className={`text-left w-full p-4 rounded-2xl border cursor-pointer transition-[border-color,box-shadow,background-color] duration-200 ${
                     isSelected
                       ? 'bg-white border-[#2E7D32] ring-2 ring-emerald-500/20 shadow-md'
                       : 'bg-white/80 border-slate-200 hover:border-slate-300 hover:bg-white'
@@ -92,7 +93,7 @@ export const PuneAreasSection: React.FC<PuneAreasSectionProps> = ({ onSelectArea
                     <span className="text-emerald-700 font-semibold">{loc.pickupSpeed}</span>
                     <span className="text-blue-600 font-medium">Select →</span>
                   </div>
-                </div>
+                </button>
               );
             })}
           </div>
@@ -128,8 +129,8 @@ export const PuneAreasSection: React.FC<PuneAreasSectionProps> = ({ onSelectArea
                 Prominent Landmarks & Routes:
               </span>
               <div className="flex flex-wrap gap-1.5">
-                {selectedArea.landmarks.map((lm, i) => (
-                  <span key={i} className="text-xs px-2 py-1 bg-white rounded-md border border-slate-200 text-slate-700">
+                {selectedArea.landmarks.map((lm) => (
+                  <span key={lm} className="text-xs px-2 py-1 bg-white rounded-md border border-slate-200 text-slate-700">
                     {lm}
                   </span>
                 ))}
@@ -148,7 +149,7 @@ export const PuneAreasSection: React.FC<PuneAreasSectionProps> = ({ onSelectArea
             {/* Book in this area */}
             <button
               onClick={() => onSelectAreaForPickup(selectedArea.name.split(' (')[0])}
-              className="w-full py-3.5 px-4 bg-[#2E7D32] hover:bg-[#256629] text-white font-bold text-sm rounded-xl shadow-md transition-all flex items-center justify-center space-x-2 cursor-pointer"
+              className="w-full py-3.5 px-4 bg-[#2E7D32] hover:bg-[#256629] text-white font-bold text-sm rounded-xl shadow-md hover:shadow-lg transition-colors flex items-center justify-center space-x-2 cursor-pointer"
             >
               <span>Schedule Pickup in {selectedArea.name.split(' (')[0]}</span>
               <ArrowRight className="w-4 h-4" />

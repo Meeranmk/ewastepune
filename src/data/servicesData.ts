@@ -13,7 +13,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     category: "core",
     acceptedMaterials: [
       "Desktop Computers & Towers",
-      "Laptops & Notebooks",
+      "Laptops",
       "CRT & LED Monitors",
       "Printers & Scanners",
       "Home Electronics & Microwaves",

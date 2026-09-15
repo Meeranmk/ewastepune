@@ -4,7 +4,7 @@ export const ACCEPTED_ITEMS_DATA: AcceptedItemCategory[] = [
   {
     id: "laptops",
     slug: "laptops",
-    name: "Laptops & Notebooks",
+    name: "Laptops",
     iconName: "Laptop",
     imageUrl: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=800&q=80",
     description: "All brands of working, non-working, broken, cracked-screen, and ancient laptops.",

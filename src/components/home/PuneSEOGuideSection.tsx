@@ -99,13 +99,17 @@ export const PuneSEOGuideSection: React.FC<PuneSEOGuideSectionProps> = ({ onOpen
 
             {/* Search Input Bar */}
             <div className="relative mb-6">
+              <label htmlFor="pune-pincode-search" className="sr-only">
+                Search Pune area or pincode
+              </label>
               <Search className="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
               <input
+                id="pune-pincode-search"
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Type your Pune area or pincode (e.g., 411013, Hinjewadi, Kharadi, Kothrud, Baner...)"
-                className="w-full pl-12 pr-4 py-3.5 sm:py-4 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-slate-400 text-sm sm:text-base focus:outline-hidden focus:ring-2 focus:ring-emerald-400 focus:bg-slate-900/90 transition-all backdrop-blur-xs"
+                className="w-full pl-12 pr-4 py-3.5 sm:py-4 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-slate-400 text-sm sm:text-base focus:outline-hidden focus:ring-2 focus:ring-emerald-400 focus:bg-slate-900/90 transition-colors backdrop-blur-xs"
               />
               {searchQuery && (
                 <button
@@ -138,7 +142,7 @@ export const PuneSEOGuideSection: React.FC<PuneSEOGuideSectionProps> = ({ onOpen
               searchResults.map((item) => (
                 <div 
                   key={item.pincode + item.name}
-                  className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/15 hover:border-emerald-400/50 transition-all flex flex-col justify-between"
+                  className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/15 hover:border-emerald-400/50 transition-colors flex flex-col justify-between"
                 >
                   <div className="space-y-2 mb-4">
                     <div className="flex items-center justify-between">
@@ -167,7 +171,7 @@ export const PuneSEOGuideSection: React.FC<PuneSEOGuideSectionProps> = ({ onOpen
 
                   <button
                     onClick={() => onOpenPickupModal({ category: `Pickup for ${item.name} (${item.pincode})` })}
-                    className="w-full py-2 px-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs shadow-xs transition-all flex items-center justify-center space-x-1.5 cursor-pointer"
+                    className="w-full py-2 px-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs shadow-xs transition-colors flex items-center justify-center space-x-1.5 cursor-pointer"
                   >
                     <span>Schedule Free Pickup Here</span>
                     <ArrowRight className="w-3.5 h-3.5" />

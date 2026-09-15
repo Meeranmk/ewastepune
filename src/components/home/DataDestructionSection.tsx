@@ -104,7 +104,7 @@ export const DataDestructionSection: React.FC<DataDestructionSectionProps> = ({ 
           <div className="flex items-center space-x-3 shrink-0">
             <button
               onClick={onOpenPickupModal}
-              className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-md transition-all cursor-pointer"
+              className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-md hover:shadow-lg transition-colors cursor-pointer"
             >
               Book Data Sanitization
             </button>
@@ -112,7 +112,7 @@ export const DataDestructionSection: React.FC<DataDestructionSectionProps> = ({ 
               href={getWhatsAppLink('Hi! We need certified hard drive data destruction and shredding at our Pune office.')}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-5 py-3 rounded-xl bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold text-sm transition-all"
+              className="px-5 py-3 rounded-xl bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold text-sm transition-colors cursor-pointer"
             >
               Inquire via WhatsApp
             </a>

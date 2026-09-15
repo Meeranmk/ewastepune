@@ -8,8 +8,7 @@ import {
   Send, 
   CheckCircle2, 
   ExternalLink,
-  Navigation,
-  ShieldCheck
+  Navigation
 } from 'lucide-react';
 import { SITE_CONFIG, getWhatsAppLink } from '../../data/siteConfig';
 
@@ -71,7 +70,6 @@ _Sent via E-Waste Center Pune Contact Page_`;
   return (
     <div className="py-12 sm:py-16 bg-[#F5F5F0]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-emerald-50 text-[#2E7D32] border border-emerald-200 text-xs font-bold mb-3">
@@ -88,10 +86,8 @@ _Sent via E-Waste Center Pune Contact Page_`;
 
         {/* 2 Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-          
           {/* Left: Contact Info & Facility Details */}
           <div className="lg:col-span-6 space-y-6">
-            
             {/* Primary Address Card */}
             <div className="bg-white rounded-3xl p-7 border border-slate-200 shadow-sm space-y-4">
               <div className="flex items-center space-x-3">
@@ -179,7 +175,6 @@ _Sent via E-Waste Center Pune Contact Page_`;
                 </div>
               </div>
             </div>
-
           </div>
 
           {/* Right: Message Form */}
@@ -199,13 +194,14 @@ _Sent via E-Waste Center Pune Contact Page_`;
                       href={lastWaUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center space-x-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-sm transition-all"
+                      className="inline-flex items-center justify-center space-x-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-xs hover:shadow-md transition-colors cursor-pointer"
                     >
                       <MessageSquare className="w-4 h-4" />
                       <span>Chat on WhatsApp</span>
                     </a>
                   )}
                   <button
+                    type="button"
                     onClick={() => {
                       setSubmitted(false);
                       setName('');
@@ -213,7 +209,7 @@ _Sent via E-Waste Center Pune Contact Page_`;
                       setSubject('');
                       setMessage('');
                     }}
-                    className="px-5 py-2.5 bg-slate-100 text-slate-700 font-semibold text-xs rounded-xl hover:bg-slate-200"
+                    className="px-5 py-2.5 bg-slate-100 text-slate-700 font-semibold text-xs rounded-xl hover:bg-slate-200 transition-colors cursor-pointer"
                   >
                     Send Another Inquiry
                   </button>
@@ -231,8 +227,11 @@ _Sent via E-Waste Center Pune Contact Page_`;
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Your Name *</label>
+                  <label htmlFor="contact-name" className="block text-xs font-bold text-slate-700 mb-1">
+                    Your Name *
+                  </label>
                   <input
+                    id="contact-name"
                     type="text"
                     required
                     value={name}
@@ -243,8 +242,11 @@ _Sent via E-Waste Center Pune Contact Page_`;
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Mobile / WhatsApp Number *</label>
+                  <label htmlFor="contact-phone" className="block text-xs font-bold text-slate-700 mb-1">
+                    Mobile / WhatsApp Number *
+                  </label>
                   <input
+                    id="contact-phone"
                     type="tel"
                     required
                     value={phone}
@@ -255,8 +257,11 @@ _Sent via E-Waste Center Pune Contact Page_`;
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Subject / Requirement</label>
+                  <label htmlFor="contact-subject" className="block text-xs font-bold text-slate-700 mb-1">
+                    Subject / Requirement
+                  </label>
                   <input
+                    id="contact-subject"
                     type="text"
                     value={subject}
                     onChange={(e) => setSubject(e.target.value)}
@@ -266,8 +271,11 @@ _Sent via E-Waste Center Pune Contact Page_`;
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Message Details</label>
+                  <label htmlFor="contact-message" className="block text-xs font-bold text-slate-700 mb-1">
+                    Message Details
+                  </label>
                   <textarea
+                    id="contact-message"
                     rows={4}
                     required
                     value={message}
@@ -280,7 +288,7 @@ _Sent via E-Waste Center Pune Contact Page_`;
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-3 bg-[#2E7D32] hover:bg-[#256629] text-white font-bold text-sm rounded-xl shadow-md transition-all flex items-center justify-center space-x-2 cursor-pointer"
+                  className="w-full py-3 bg-[#2E7D32] hover:bg-[#256629] text-white font-bold text-sm rounded-xl shadow-md hover:shadow-lg transition-colors flex items-center justify-center space-x-2 cursor-pointer"
                 >
                   <Send className="w-4 h-4" />
                   <span>{loading ? 'Sending...' : 'Send Message'}</span>
@@ -288,9 +296,7 @@ _Sent via E-Waste Center Pune Contact Page_`;
               </form>
             )}
           </div>
-
         </div>
-
       </div>
     </div>
   );

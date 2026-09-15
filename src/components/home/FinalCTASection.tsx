@@ -32,7 +32,7 @@ export const FinalCTASection: React.FC<FinalCTASectionProps> = ({ onOpenPickupMo
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
           <button
             onClick={onOpenPickupModal}
-            className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white text-[#2E7D32] hover:bg-emerald-50 font-extrabold text-base shadow-xl hover:shadow-2xl transition-all flex items-center justify-center space-x-2 cursor-pointer"
+            className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white text-[#2E7D32] hover:bg-emerald-50 font-extrabold text-base shadow-xl hover:shadow-2xl transition-colors flex items-center justify-center space-x-2 cursor-pointer"
           >
             <Truck className="w-5 h-5" />
             <span>Schedule Free Pickup</span>
@@ -40,7 +40,7 @@ export const FinalCTASection: React.FC<FinalCTASectionProps> = ({ onOpenPickupMo
 
           <a
             href={`tel:${SITE_CONFIG.phone.replace(/\s+/g, '')}`}
-            className="w-full sm:w-auto px-7 py-4 rounded-xl bg-emerald-900/60 hover:bg-emerald-900 text-white border border-white/30 font-bold text-base transition-all flex items-center justify-center space-x-2"
+            className="w-full sm:w-auto px-7 py-4 rounded-xl bg-emerald-900/60 hover:bg-emerald-900 text-white border border-white/30 font-bold text-base transition-colors flex items-center justify-center space-x-2"
           >
             <Phone className="w-5 h-5" />
             <span>Call Us: {SITE_CONFIG.formattedPhone}</span>
@@ -50,7 +50,7 @@ export const FinalCTASection: React.FC<FinalCTASectionProps> = ({ onOpenPickupMo
             href={getWhatsAppLink('Hi! I want to schedule an e-waste pickup in Pune.')}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto px-6 py-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-base shadow-md transition-all flex items-center justify-center space-x-2"
+            className="w-full sm:w-auto px-6 py-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-base shadow-md hover:shadow-lg transition-colors flex items-center justify-center space-x-2"
           >
             <MessageSquare className="w-5 h-5" />
             <span>WhatsApp</span>

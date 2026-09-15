@@ -30,7 +30,7 @@ export const ResidentialCorporateSection: React.FC<ResidentialCorporateSectionPr
           <div className="p-1.5 bg-slate-100 rounded-2xl inline-flex space-x-1 border border-slate-200 shadow-inner">
             <button
               onClick={() => setActiveTab('residential')}
-              className={`px-6 py-3 rounded-xl font-bold text-sm sm:text-base flex items-center space-x-2 transition-all ${
+              className={`px-6 py-3 rounded-xl font-bold text-sm sm:text-base flex items-center space-x-2 transition-colors cursor-pointer ${
                 activeTab === 'residential'
                   ? 'bg-white text-[#2E7D32] shadow-sm'
                   : 'text-slate-600 hover:text-slate-900'
@@ -42,7 +42,7 @@ export const ResidentialCorporateSection: React.FC<ResidentialCorporateSectionPr
 
             <button
               onClick={() => setActiveTab('corporate')}
-              className={`px-6 py-3 rounded-xl font-bold text-sm sm:text-base flex items-center space-x-2 transition-all ${
+              className={`px-6 py-3 rounded-xl font-bold text-sm sm:text-base flex items-center space-x-2 transition-colors cursor-pointer ${
                 activeTab === 'corporate'
                   ? 'bg-white text-[#1565C0] shadow-sm'
                   : 'text-slate-600 hover:text-slate-900'
@@ -79,8 +79,8 @@ export const ResidentialCorporateSection: React.FC<ResidentialCorporateSectionPr
                   "Safe recycling for old TVs, PCs & laptops",
                   "Batteries & UPS safely neutralized",
                   "No minimum weight restrictions on route days"
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-center space-x-2 text-xs sm:text-sm text-slate-700">
+                ].map((item) => (
+                  <div key={item} className="flex items-center space-x-2 text-xs sm:text-sm text-slate-700">
                     <CheckCircle2 className="w-4 h-4 text-[#2E7D32] shrink-0" />
                     <span>{item}</span>
                   </div>
@@ -90,7 +90,7 @@ export const ResidentialCorporateSection: React.FC<ResidentialCorporateSectionPr
               <div className="pt-4">
                 <button
                   onClick={onOpenPickupModal}
-                  className="px-7 py-3.5 bg-[#2E7D32] hover:bg-[#256629] text-white font-bold text-sm rounded-xl shadow-md transition-all flex items-center space-x-2 cursor-pointer"
+                  className="px-7 py-3.5 bg-[#2E7D32] hover:bg-[#256629] text-white font-bold text-sm rounded-xl shadow-md hover:shadow-lg transition-colors flex items-center space-x-2 cursor-pointer"
                 >
                   <Truck className="w-4 h-4" />
                   <span>Sell Household E-Waste</span>
@@ -149,8 +149,8 @@ export const ResidentialCorporateSection: React.FC<ResidentialCorporateSectionPr
                   "Serialized barcoded asset tracking manifests",
                   "Bulk lot purchasing with maximum ITAD value recovery",
                   "Custom locked collection bins for corporate campuses"
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-center space-x-2 text-xs sm:text-sm text-slate-700">
+                ].map((item) => (
+                  <div key={item} className="flex items-center space-x-2 text-xs sm:text-sm text-slate-700">
                     <CheckCircle2 className="w-4 h-4 text-[#1565C0] shrink-0" />
                     <span>{item}</span>
                   </div>
@@ -160,7 +160,7 @@ export const ResidentialCorporateSection: React.FC<ResidentialCorporateSectionPr
               <div className="pt-4 flex items-center space-x-3">
                 <button
                   onClick={onOpenCorporateEnquiry}
-                  className="px-7 py-3.5 bg-[#1565C0] hover:bg-[#0d47a1] text-white font-bold text-sm rounded-xl shadow-md transition-all flex items-center space-x-2 cursor-pointer"
+                  className="px-7 py-3.5 bg-[#1565C0] hover:bg-[#0d47a1] text-white font-bold text-sm rounded-xl shadow-md hover:shadow-lg transition-colors flex items-center space-x-2 cursor-pointer"
                 >
                   <FileCheck className="w-4 h-4" />
                   <span>Request Corporate Proposal</span>
@@ -182,8 +182,8 @@ export const ResidentialCorporateSection: React.FC<ResidentialCorporateSectionPr
                   "Auto & Manufacturing",
                   "Startups & Co-working",
                   "Telecom Operators"
-                ].map((ind, i) => (
-                  <div key={i} className="p-2.5 bg-slate-50 rounded-xl border border-slate-100 flex items-center space-x-1.5">
+                ].map((ind) => (
+                  <div key={ind} className="p-2.5 bg-slate-50 rounded-xl border border-slate-100 flex items-center space-x-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
                     <span className="truncate">{ind}</span>
                   </div>

@@ -58,7 +58,7 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ onOpenPick
           {steps.map((step, idx) => (
             <div
               key={step.num}
-              className="bg-[#F5F5F0]/80 rounded-3xl p-6 border border-slate-200 hover:border-emerald-400 hover:shadow-lg transition-all flex flex-col justify-between relative group"
+              className="bg-[#F5F5F0]/80 rounded-3xl p-6 border border-slate-200 hover:border-emerald-400 hover:shadow-lg transition-[border-color,box-shadow] duration-200 flex flex-col justify-between relative group"
             >
               <div>
                 {/* Step Number & Icon */}
@@ -114,7 +114,7 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ onOpenPick
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <button
                 onClick={onOpenPickupModal}
-                className="inline-flex items-center space-x-2 px-6 py-3 bg-[#2E7D32] hover:bg-[#256629] text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-md transition-all cursor-pointer"
+                className="inline-flex items-center space-x-2 px-6 py-3 bg-[#2E7D32] hover:bg-[#256629] text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-md hover:shadow-lg transition-colors cursor-pointer"
               >
                 <span>Schedule Doorstep Pickup</span>
                 <ArrowRight className="w-4 h-4" />

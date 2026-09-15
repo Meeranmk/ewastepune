@@ -40,7 +40,7 @@ export const FAQSection: React.FC = () => {
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
+              className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
                 selectedCategory === cat
                   ? 'bg-[#2E7D32] text-white shadow-xs'
                   : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
@@ -58,7 +58,7 @@ export const FAQSection: React.FC = () => {
             return (
               <div
                 key={faq.id}
-                className="border border-slate-200 rounded-2xl overflow-hidden transition-all bg-[#F5F5F0]/50"
+                className="border border-slate-200 rounded-2xl overflow-hidden transition-colors bg-[#F5F5F0]/50"
               >
                 <button
                   type="button"

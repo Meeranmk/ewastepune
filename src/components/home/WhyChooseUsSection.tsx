@@ -63,10 +63,10 @@ export const WhyChooseUsSection: React.FC = () => {
 
         {/* 6 Feature Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {reasons.map((item, idx) => (
+          {reasons.map((item) => (
             <div
-              key={idx}
-              className="bg-white rounded-3xl p-7 border border-slate-200 hover:border-emerald-400 hover:shadow-lg transition-all group"
+              key={item.title}
+              className="bg-white rounded-3xl p-7 border border-slate-200 hover:border-emerald-400 hover:shadow-lg transition-[border-color,box-shadow] duration-200 group"
             >
               <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#2E7D32] to-[#1565C0] flex items-center justify-center mb-5 shadow-md group-hover:scale-105 transition-transform">
                 {item.icon}

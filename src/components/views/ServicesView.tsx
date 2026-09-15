@@ -68,7 +68,7 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onOpenPickupModal, s
                 <button
                   key={srv.id}
                   onClick={() => setActiveTab(srv.id)}
-                  className={`w-full p-4 rounded-2xl text-left transition-all flex items-center justify-between border ${
+                  className={`w-full p-4 rounded-2xl text-left transition-[border-color,box-shadow,background-color] duration-200 flex items-center justify-between border ${
                     isSelected
                       ? 'bg-white border-[#2E7D32] shadow-md ring-2 ring-emerald-500/20'
                       : 'bg-white/80 border-slate-200 hover:bg-white hover:border-slate-300'
@@ -114,8 +114,8 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onOpenPickupModal, s
                 <span>Materials & Hardware Handled:</span>
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                {currentService.acceptedMaterials.map((mat, i) => (
-                  <div key={i} className="p-2.5 bg-slate-50 rounded-xl border border-slate-100 flex items-center space-x-2 text-xs text-slate-700">
+                {currentService.acceptedMaterials.map((mat) => (
+                  <div key={mat} className="p-2.5 bg-slate-50 rounded-xl border border-slate-100 flex items-center space-x-2 text-xs text-slate-700">
                     <CheckCircle2 className="w-4 h-4 text-[#2E7D32] shrink-0" />
                     <span>{mat}</span>
                   </div>
@@ -130,8 +130,8 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onOpenPickupModal, s
                 <span>Client Advantages & Guarantees:</span>
               </h3>
               <div className="space-y-2">
-                {currentService.benefits.map((b, i) => (
-                  <div key={i} className="flex items-start space-x-2.5 text-xs sm:text-sm text-slate-600">
+                {currentService.benefits.map((b) => (
+                  <div key={b} className="flex items-start space-x-2.5 text-xs sm:text-sm text-slate-600">
                     <span className="w-2 h-2 rounded-full bg-emerald-500 mt-1.5 shrink-0"></span>
                     <span>{b}</span>
                   </div>
@@ -147,7 +147,7 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onOpenPickupModal, s
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {currentService.processSteps.map((step, idx) => (
-                  <div key={idx} className="flex items-start space-x-3 text-xs text-slate-700">
+                  <div key={step} className="flex items-start space-x-3 text-xs text-slate-700">
                     <span className="w-6 h-6 rounded-full bg-blue-100 text-[#1565C0] font-bold flex items-center justify-center shrink-0">
                       {idx + 1}
                     </span>
@@ -165,7 +165,7 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onOpenPickupModal, s
               </div>
               <button
                 onClick={() => onOpenPickupModal(currentService.name)}
-                className="w-full sm:w-auto px-7 py-3.5 bg-[#2E7D32] hover:bg-[#256629] text-white font-bold text-sm rounded-xl shadow-md transition-all flex items-center justify-center space-x-2 cursor-pointer"
+                className="w-full sm:w-auto px-7 py-3.5 bg-[#2E7D32] hover:bg-[#256629] text-white font-bold text-sm rounded-xl shadow-md hover:shadow-lg transition-colors flex items-center justify-center space-x-2 cursor-pointer"
               >
                 <Truck className="w-4 h-4" />
                 <span>Request {currentService.name}</span>

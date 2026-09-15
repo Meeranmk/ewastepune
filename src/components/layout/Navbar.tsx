@@ -76,9 +76,11 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-4">
           {/* Brand Logo */}
-          <div 
+          <button 
+            type="button"
             onClick={() => handleNavClick('home')}
-            className="cursor-pointer flex items-center gap-2 sm:gap-2.5 shrink-0 group select-none py-1"
+            className="text-left cursor-pointer flex items-center gap-2 sm:gap-2.5 shrink-0 group select-none py-1 border-0 bg-transparent focus:outline-hidden"
+            aria-label="Go to Home"
           >
             <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-[#2E7D32] to-[#1565C0] flex items-center justify-center text-white shadow-xs group-hover:scale-105 transition-transform shrink-0 relative">
               <Truck className="w-4.5 h-4.5 sm:w-6 sm:h-6 text-white shrink-0 block" />
@@ -95,7 +97,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 Certified Scrap Buyers & Doorstep Recycling
               </p>
             </div>
-          </div>
+          </button>
 
           {/* Desktop Navigation Links (5 Clean Links) */}
           <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2 shrink-0">
@@ -105,7 +107,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap shrink-0 cursor-pointer ${
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                     active
                       ? 'text-[#2E7D32] bg-emerald-50 font-semibold shadow-2xs'
                       : 'text-slate-700 hover:text-[#1565C0] hover:bg-slate-50'
@@ -131,7 +133,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={onOpenPickupModal}
-              className="inline-flex items-center justify-center space-x-2 px-4 h-10 rounded-xl text-sm font-bold text-white bg-[#2E7D32] hover:bg-[#256629] shadow-xs hover:shadow-md transition-all active:scale-98 whitespace-nowrap shrink-0 cursor-pointer"
+              className="inline-flex items-center justify-center space-x-2 px-4 h-10 rounded-xl text-sm font-bold text-white bg-[#2E7D32] hover:bg-[#256629] shadow-xs hover:shadow-md transition-[background-color,box-shadow,transform] duration-150 active:scale-98 whitespace-nowrap shrink-0 cursor-pointer"
             >
               <Truck className="w-4 h-4 shrink-0" />
               <span>Schedule Pickup</span>

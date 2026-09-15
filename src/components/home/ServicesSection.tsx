@@ -55,7 +55,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
           {SERVICES_DATA.map((service) => (
             <div
               key={service.id}
-              className="bg-[#F5F5F0]/60 rounded-3xl p-7 border border-slate-200/90 hover:border-emerald-500/50 hover:shadow-xl transition-all flex flex-col justify-between group"
+              className="bg-[#F5F5F0]/60 rounded-3xl p-7 border border-slate-200/90 hover:border-emerald-500/50 hover:shadow-xl transition-[border-color,box-shadow] duration-200 flex flex-col justify-between group"
             >
               <div>
                 {/* Icon & Category */}
@@ -78,8 +78,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
 
                 {/* Key Points */}
                 <div className="space-y-2 mb-6 border-t border-slate-200/60 pt-4">
-                  {service.benefits.slice(0, 3).map((benefit, i) => (
-                    <div key={i} className="flex items-start space-x-2 text-xs text-slate-700">
+                  {service.benefits.slice(0, 3).map((benefit) => (
+                    <div key={benefit} className="flex items-start space-x-2 text-xs text-slate-700">
                       <CheckCircle2 className="w-4 h-4 text-[#2E7D32] shrink-0 mt-0.5" />
                       <span>{benefit}</span>
                     </div>
@@ -119,7 +119,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
           <div className="flex items-center space-x-3 shrink-0">
             <button
               onClick={onOpenPickupModal}
-              className="px-5 py-3 rounded-xl bg-[#2E7D32] hover:bg-[#256629] text-white font-bold text-sm shadow-md transition-all"
+              className="px-5 py-3 rounded-xl bg-[#2E7D32] hover:bg-[#256629] text-white font-bold text-sm shadow-md hover:shadow-lg transition-colors cursor-pointer"
             >
               Request Corporate Inspection
             </button>

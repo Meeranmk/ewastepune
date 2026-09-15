@@ -65,8 +65,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 { title: "Responsible Recycling", sub: "MPCB compliant" },
                 { title: "Residential & Corporate", sub: "All quantities" },
                 { title: "Pune-Wide Service", sub: "Same/next day" }
-              ].map((badge, idx) => (
-                <div key={idx} className="bg-white/80 backdrop-blur-xs p-2.5 rounded-xl border border-slate-200/80 shadow-2xs">
+              ].map((badge) => (
+                <div key={badge.title} className="bg-white/80 backdrop-blur-xs p-2.5 rounded-xl border border-slate-200/80 shadow-2xs">
                   <div className="flex items-center space-x-1.5 text-[#2E7D32]">
                     <CheckCircle2 className="w-4 h-4 shrink-0" />
                     <span className="text-xs font-bold text-slate-800 truncate">{badge.title}</span>
@@ -80,7 +80,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
               <button
                 onClick={onOpenPickupModal}
-                className="px-7 py-4 rounded-xl bg-[#2E7D32] hover:bg-[#256629] text-white font-extrabold text-base shadow-lg hover:shadow-xl transition-all flex items-center justify-center space-x-2.5 cursor-pointer active:scale-98"
+                className="px-7 py-4 rounded-xl bg-[#2E7D32] hover:bg-[#256629] text-white font-extrabold text-base shadow-lg hover:shadow-xl transition-[background-color,box-shadow,transform] duration-150 flex items-center justify-center space-x-2.5 cursor-pointer active:scale-98"
               >
                 <Truck className="w-5 h-5" />
                 <span>Schedule Free Pickup</span>
@@ -145,7 +145,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 <div className="grid grid-cols-2 gap-2 text-[11px] text-slate-700 font-medium pt-1">
                   <div className="flex items-center space-x-1.5 bg-white p-2 rounded-lg border border-slate-200">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    <span>Laptops & Notebooks</span>
+                    <span>Laptops</span>
                   </div>
                   <div className="flex items-center space-x-1.5 bg-white p-2 rounded-lg border border-slate-200">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
@@ -164,7 +164,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 <button
                   type="button"
                   onClick={onOpenPickupModal}
-                  className="w-full py-3 px-4 bg-[#2E7D32] hover:bg-[#256629] text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-md transition-all flex items-center justify-center space-x-2 cursor-pointer active:scale-98"
+                  className="w-full py-3 px-4 bg-[#2E7D32] hover:bg-[#256629] text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-md hover:shadow-lg transition-[background-color,box-shadow,transform] duration-150 flex items-center justify-center space-x-2 cursor-pointer active:scale-98"
                 >
                   <Truck className="w-4 h-4" />
                   <span>Schedule Free Doorstep Pickup</span>
