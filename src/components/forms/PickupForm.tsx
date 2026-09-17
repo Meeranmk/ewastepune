@@ -30,23 +30,16 @@ const AVAILABLE_CATEGORIES = [
 
 export const PickupForm: React.FC<PickupFormProps> = ({
   initialCategory,
-  initialQuantity,
   onSuccess,
   compact = false
 }) => {
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [company, setCompany] = useState('');
   const [address, setAddress] = useState('');
   const [area, setArea] = useState('Hadapsar');
   const [selectedCategories, setSelectedCategories] = useState<string[]>(
     initialCategory ? [initialCategory] : ['Laptops', 'Computers']
   );
-  const [quantity, setQuantity] = useState(initialQuantity || '');
-  const [pickupDate, setPickupDate] = useState('');
-  const [message, setMessage] = useState('');
-  const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
   
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -62,13 +55,6 @@ export const PickupForm: React.FC<PickupFormProps> = ({
     }
   };
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const filesArray = Array.from(e.target.files).map((f: File) => f.name);
-      setUploadedFiles(prev => [...prev, ...filesArray].slice(0, 3));
-    }
-  };
-
   const validatePhone = (num: string) => {
     const cleaned = num.replace(/\D/g, '');
     return cleaned.length >= 10 && cleaned.length <= 12;
@@ -79,9 +65,6 @@ export const PickupForm: React.FC<PickupFormProps> = ({
     setFullName('');
     setPhone('');
     setAddress('');
-    setQuantity('');
-    setMessage('');
-    setUploadedFiles([]);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -115,14 +98,9 @@ export const PickupForm: React.FC<PickupFormProps> = ({
       id: leadId,
       name: fullName,
       phone,
-      email: email || undefined,
-      company: company || undefined,
       address,
       area,
       eWasteType: selectedCategories,
-      quantity: quantity || 'Not specified',
-      pickupDate: pickupDate || undefined,
-      message: message || undefined,
       source: compact ? 'Quick Modal' : 'Pickup Page',
       createdAt: new Date().toISOString(),
       status: 'NEW'
@@ -143,9 +121,6 @@ export const PickupForm: React.FC<PickupFormProps> = ({
 *Area:* ${area}, Pune
 *Address:* ${address}
 *Items:* ${selectedCategories.join(', ')}
-*Quantity:* ${quantity || 'Not specified'}
-*Preferred Date:* ${pickupDate || 'Earliest available'}
-*Notes:* ${message || 'None'}
 ━━━━━━━━━━━━━━━━━━━━
 _Submitted via E-Waste Center Pune Portal_`;
 
@@ -175,7 +150,7 @@ _Submitted via E-Waste Center Pune Portal_`;
           Request Free E-Waste Pickup
         </h3>
         <p className="text-xs sm:text-sm text-slate-500 mt-1">
-          Sell your electronic scrap or schedule responsible recycling with instant payment on site.
+          Schedule responsible recycling with instant on-site payment across Pune.
         </p>
       </div>
 
@@ -189,27 +164,15 @@ _Submitted via E-Waste Center Pune Portal_`;
       <PickupContactFields
         fullName={fullName}
         phone={phone}
-        email={email}
-        company={company}
         onFullNameChange={setFullName}
         onPhoneChange={setPhone}
-        onEmailChange={setEmail}
-        onCompanyChange={setCompany}
       />
 
       <PickupLocationScheduleFields
         area={area}
         address={address}
-        quantity={quantity}
-        pickupDate={pickupDate}
-        uploadedFiles={uploadedFiles}
-        message={message}
         onAreaChange={setArea}
         onAddressChange={setAddress}
-        onQuantityChange={setQuantity}
-        onPickupDateChange={setPickupDate}
-        onFileUpload={handleFileUpload}
-        onMessageChange={setMessage}
       />
 
       <PickupCategorySelector

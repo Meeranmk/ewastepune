@@ -9,6 +9,12 @@ interface PickupConfirmationProps {
 }
 
 export const PickupConfirmation: React.FC<PickupConfirmationProps> = ({ lead, onReset }) => {
+  const extraLines = [
+    lead.quantity ? `*Quantity:* ${lead.quantity}` : '',
+    lead.pickupDate ? `*Preferred Date:* ${lead.pickupDate}` : '',
+    lead.message ? `*Notes:* ${lead.message}` : ''
+  ].filter(Boolean).join('\n');
+
   const confirmationText = `🚛 *New E-Waste Pickup Request* (#${lead.id})
 ━━━━━━━━━━━━━━━━━━━━
 *Name:* ${lead.name}
@@ -16,10 +22,7 @@ export const PickupConfirmation: React.FC<PickupConfirmationProps> = ({ lead, on
 *Area:* ${lead.area}, Pune
 *Address:* ${lead.address}
 *Items:* ${lead.eWasteType.join(', ')}
-*Quantity:* ${lead.quantity || 'Not specified'}
-*Preferred Date:* ${lead.pickupDate || 'Earliest available'}
-*Notes:* ${lead.message || 'None'}
-━━━━━━━━━━━━━━━━━━━━
+${extraLines ? `${extraLines}\n` : ''}━━━━━━━━━━━━━━━━━━━━
 _Submitted via E-Waste Center Pune Portal_`;
 
   return (

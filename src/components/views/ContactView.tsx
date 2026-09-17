@@ -12,7 +12,14 @@ import {
 } from 'lucide-react';
 import { SITE_CONFIG, getWhatsAppLink } from '../../data/siteConfig';
 
-export const ContactView: React.FC = () => {
+import { SubpageHero } from './SubpageHero';
+
+interface ContactViewProps {
+  onNavigate?: (path: string) => void;
+  onOpenPickupModal?: () => void;
+}
+
+export const ContactView: React.FC<ContactViewProps> = ({ onNavigate, onOpenPickupModal }) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [subject, setSubject] = useState('');
@@ -68,22 +75,27 @@ _Sent via E-Waste Center Pune Contact Page_`;
   )}`;
 
   return (
-    <div className="py-12 sm:py-16 bg-[#F5F5F0]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-emerald-50 text-[#2E7D32] border border-emerald-200 text-xs font-bold mb-3">
-            <MapPin className="w-3.5 h-3.5" />
-            <span>Facility Hub & Contact Directory</span>
-          </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Contact E-Waste Center Pune
-          </h1>
-          <p className="text-base text-slate-600 mt-2">
-            Visit our central facility in Hadapsar, call our logistics desk, or request a doorstep collection van across Pune.
-          </p>
-        </div>
+    <div className="bg-[#F5F5F0] min-h-screen">
+      {/* Subpage Hero */}
+      <SubpageHero
+        badge="Facility Hub & Contact Directory"
+        badgeIcon={<MapPin className="w-3.5 h-3.5" />}
+        title="Contact E-Waste Center Pune"
+        description="Visit our central recycling facility in Hadapsar, call our logistics desk, or request a doorstep collection van across Pune and PCMC."
+        breadcrumbs={[
+          { label: 'Home', href: '/', onClick: () => onNavigate?.('/') },
+          { label: 'Contact Us' },
+        ]}
+        onOpenPickupModal={onOpenPickupModal}
+        stats={[
+          { label: 'Central Hub', value: 'Hadapsar' },
+          { label: 'Working Days', value: 'Mon - Sat' },
+          { label: 'Response Time', value: '< 15 Mins' },
+          { label: 'Pickup Van', value: 'Pune-Wide' },
+        ]}
+      />
 
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         {/* 2 Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           {/* Left: Contact Info & Facility Details */}

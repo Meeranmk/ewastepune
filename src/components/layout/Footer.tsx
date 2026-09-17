@@ -13,7 +13,7 @@ import {
 import { SITE_CONFIG, getWhatsAppLink } from '../../data/siteConfig';
 
 interface FooterProps {
-  onNavigate: (view: string) => void;
+  onNavigate: (view: string, path?: string) => void;
   onOpenPickupModal: () => void;
 }
 
@@ -83,27 +83,29 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenPickupModal })
             </h3>
             <ul className="space-y-2.5 text-sm">
               {[
-                { id: 'home', label: 'Home Page' },
-                { id: 'services', label: 'Our Recycling Services' },
-                { id: 'what-we-accept', label: 'Accepted Electronic Items' },
-                { id: 'corporate', label: 'Corporate ITAD & Enterprise' },
-                { id: 'how-it-works', label: 'How Pickup Works' },
-                { id: 'areas', label: 'Pune Areas Covered' },
-                { id: 'pune-ewaste-guide', label: 'Pune E-Waste & Pincode Guide' },
-                { id: 'faq', label: 'Frequently Asked Questions' },
-                { id: 'contact', label: 'Contact Us & Facility Map' },
+                { id: 'home', path: '/', label: 'Home Page' },
+                { id: 'services', path: '/services', label: 'Our Recycling Services' },
+                { id: 'what-we-accept', path: '/what-we-accept', label: 'Accepted Electronic Items' },
+                { id: 'corporate', path: '/corporate', label: 'Corporate ITAD & Enterprise' },
+                { id: 'how-it-works', path: '/how-it-works', label: 'How Pickup Works' },
+                { id: 'pune-ewaste-guide', path: '/pune-ewaste-guide', label: 'Pune E-Waste & Pincode Guide' },
+                { id: 'contact', path: '/contact', label: 'Contact Us & Facility Map' },
+                { id: 'sitemap', path: '/sitemap', label: 'HTML Sitemap & Directory' },
               ].map((link) => (
                 <li key={link.id}>
-                  <button
-                    onClick={() => {
-                      onNavigate(link.id);
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                  <a
+                    href={link.path}
+                    onClick={(e) => {
+                      if (!e.metaKey && !e.ctrlKey) {
+                        e.preventDefault();
+                        onNavigate(link.id, link.path);
+                      }
                     }}
-                    className="hover:text-emerald-400 transition-colors flex items-center space-x-1.5 text-left text-slate-400 hover:text-white"
+                    className="hover:text-emerald-400 transition-colors flex items-center space-x-1.5 text-left text-slate-400 hover:text-white cursor-pointer"
                   >
                     <ChevronRight className="w-3.5 h-3.5 text-slate-500" />
                     <span>{link.label}</span>
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -196,10 +198,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenPickupModal })
             </span>
           </div>
 
-          <div className="flex items-center space-x-4">
-            <button onClick={() => onNavigate('privacy')} className="hover:text-slate-300">Privacy Policy</button>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <button onClick={() => onNavigate('sitemap', '/sitemap')} className="hover:text-emerald-400 cursor-pointer">HTML Sitemap</button>
             <span>•</span>
-            <button onClick={() => onNavigate('terms')} className="hover:text-slate-300">Terms of Service</button>
+            <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400">XML Sitemap</a>
+            <span>•</span>
+            <button onClick={() => onNavigate('privacy')} className="hover:text-slate-300 cursor-pointer">Privacy Policy</button>
+            <span>•</span>
+            <button onClick={() => onNavigate('terms')} className="hover:text-slate-300 cursor-pointer">Terms of Service</button>
           </div>
         </div>
 

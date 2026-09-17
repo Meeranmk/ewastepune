@@ -10,23 +10,77 @@ import { WhyChooseUsSection } from './components/home/WhyChooseUsSection';
 import { ResidentialCorporateSection } from './components/home/ResidentialCorporateSection';
 import { DataDestructionSection } from './components/home/DataDestructionSection';
 import { SustainabilitySection } from './components/home/SustainabilitySection';
-import { PuneAreasSection } from './components/home/PuneAreasSection';
 import { PuneSEOGuideSection } from './components/home/PuneSEOGuideSection';
-import { FAQSection } from './components/home/FAQSection';
 import { FinalCTASection } from './components/home/FinalCTASection';
 import { ServicesView } from './components/views/ServicesView';
 import { WhatWeAcceptView } from './components/views/WhatWeAcceptView';
 import { CorporateView } from './components/views/CorporateView';
 import { ContactView } from './components/views/ContactView';
+import { SitemapView } from './components/views/SitemapView';
 import { PickupModal } from './components/modals/PickupModal';
 import { ServiceItem } from './types';
+import { SERVICES_DATA } from './data/servicesData';
+import { ACCEPTED_ITEMS_DATA } from './data/acceptedItemsData';
+
+type ViewType = 'home' | 'services' | 'accept' | 'corporate' | 'contact' | 'sitemap';
+
+const getServiceFromPath = (path: string): ServiceItem | null => {
+  if (path.startsWith('/services/')) {
+    const slug = path.replace('/services/', '').replace(/\/+$/, '');
+    return SERVICES_DATA.find(s => s.slug === slug || s.id === slug) || null;
+  }
+  return null;
+};
+
+const getCategoryFromPath = (path: string): string | undefined => {
+  if (path.startsWith('/what-we-accept/')) {
+    const slug = path.replace('/what-we-accept/', '').replace(/\/+$/, '');
+    const match = ACCEPTED_ITEMS_DATA.find(c => c.slug === slug || c.id === slug);
+    return match ? match.id : undefined;
+  }
+  return undefined;
+};
+
+const pathToView = (pathname: string): ViewType => {
+  const clean = pathname.replace(/\/+$/, '') || '/';
+  if (clean === '/services' || clean.startsWith('/services/')) return 'services';
+  if (clean === '/what-we-accept' || clean.startsWith('/what-we-accept/')) return 'accept';
+  if (clean === '/corporate') return 'corporate';
+  if (clean === '/contact') return 'contact';
+  if (clean === '/sitemap') return 'sitemap';
+  return 'home';
+};
+
+const viewToPath = (view: string): string => {
+  if (view === 'services') return '/services';
+  if (view === 'accept' || view === 'what-we-accept') return '/what-we-accept';
+  if (view === 'corporate') return '/corporate';
+  if (view === 'contact') return '/contact';
+  if (view === 'sitemap') return '/sitemap';
+  return '/';
+};
 
 export default function App() {
-  const [currentView, setCurrentView] = useState<
-    'home' | 'services' | 'accept' | 'corporate' | 'contact'
-  >('home');
+  const [currentView, setCurrentView] = useState<ViewType>(() => {
+    if (typeof window !== 'undefined') {
+      return pathToView(window.location.pathname);
+    }
+    return 'home';
+  });
 
-  const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
+  const [selectedService, setSelectedService] = useState<ServiceItem | null>(() => {
+    if (typeof window !== 'undefined') {
+      return getServiceFromPath(window.location.pathname);
+    }
+    return null;
+  });
+
+  const [selectedCategory, setSelectedCategory] = useState<string | undefined>(() => {
+    if (typeof window !== 'undefined') {
+      return getCategoryFromPath(window.location.pathname);
+    }
+    return undefined;
+  });
 
   // Pickup Modal state
   const [isPickupModalOpen, setIsPickupModalOpen] = useState(false);
@@ -35,10 +89,64 @@ export default function App() {
     initialQuantity?: string;
   }>({});
 
+  // Sync with browser back/forward buttons
+  useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname;
+      const view = pathToView(path);
+      setCurrentView(view);
+      setSelectedService(getServiceFromPath(path));
+      setSelectedCategory(getCategoryFromPath(path));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
   // Scroll to top on view changes
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentView]);
+
+  // Dynamically update document title and canonical tag for SEO
+  useEffect(() => {
+    let title = "E-Waste in Pune | #1 E Waste Buyer & Recycling Center Pune | Doorstep Pickup";
+    let canonical = "https://ewastecenterpune.online/";
+
+    if (currentView === 'services') {
+      title = selectedService 
+        ? `${selectedService.title} | E-Waste Center Pune`
+        : "E-Waste Recycling & Scrap Buying Services | E-Waste Center Pune";
+      canonical = selectedService 
+        ? `https://ewastecenterpune.online/services/${selectedService.slug}`
+        : "https://ewastecenterpune.online/services";
+    } else if (currentView === 'accept') {
+      title = selectedCategory
+        ? `${ACCEPTED_ITEMS_DATA.find(c => c.id === selectedCategory)?.name || 'Items'} Scrap Recycling Pune | What We Accept`
+        : "What We Accept - Electronic Scrap & E-Waste Catalog | E-Waste Center Pune";
+      canonical = selectedCategory
+        ? `https://ewastecenterpune.online/what-we-accept/${selectedCategory}`
+        : "https://ewastecenterpune.online/what-we-accept";
+    } else if (currentView === 'corporate') {
+      title = "Corporate E-Waste Management & IT Asset Disposal (ITAD) Pune";
+      canonical = "https://ewastecenterpune.online/corporate";
+    } else if (currentView === 'contact') {
+      title = "Contact E-Waste Center Pune | Doorstep Pickup & Hadapsar Facility Map";
+      canonical = "https://ewastecenterpune.online/contact";
+    } else if (currentView === 'sitemap') {
+      title = "HTML Sitemap & Navigation Index | E-Waste Center Pune";
+      canonical = "https://ewastecenterpune.online/sitemap";
+    }
+
+    document.title = title;
+    
+    // Update canonical link element
+    const linkCanonical = document.querySelector('link[rel="canonical"]');
+    if (linkCanonical) {
+      linkCanonical.setAttribute('href', canonical);
+    }
+  }, [currentView, selectedService, selectedCategory]);
 
   const handleOpenPickupModal = (params?: {
     category?: string;
@@ -57,23 +165,20 @@ export default function App() {
 
   const handleSelectServiceFromHome = (service: ServiceItem) => {
     setSelectedService(service);
-    setCurrentView('services');
-  };
-
-  const handleSelectAreaFromHome = (areaName: string) => {
-    handleOpenPickupModal({
-      category: 'Electronics Scrap'
-    });
-  };
-
-  const handleNavigate = (view: string) => {
-    if (view === 'what-we-accept') {
-      setCurrentView('accept');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
+    const targetPath = `/services/${service.slug}`;
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState(null, '', targetPath);
     }
-    if (view === 'how-it-works' || view === 'areas' || view === 'faq' || view === 'pune-ewaste-guide') {
+    setCurrentView('services');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleNavigate = (view: string, path?: string) => {
+    if (view === 'how-it-works' || view === 'pune-ewaste-guide') {
       if (currentView !== 'home') {
+        if (window.location.pathname !== '/') {
+          window.history.pushState(null, '', '/');
+        }
         setCurrentView('home');
         setTimeout(() => {
           const el = document.getElementById(view);
@@ -85,7 +190,36 @@ export default function App() {
       }
       return;
     }
-    setCurrentView(view as any);
+
+    let resolvedView: ViewType = 'home';
+    if (view === '/' || view === 'home') {
+      resolvedView = 'home';
+    } else if (view === 'services' || view === '/services' || view.startsWith('/services/')) {
+      resolvedView = 'services';
+    } else if (view === 'accept' || view === 'what-we-accept' || view === '/what-we-accept' || view.startsWith('/what-we-accept/')) {
+      resolvedView = 'accept';
+    } else if (view === 'corporate' || view === '/corporate') {
+      resolvedView = 'corporate';
+    } else if (view === 'contact' || view === '/contact') {
+      resolvedView = 'contact';
+    } else if (view === 'sitemap' || view === '/sitemap') {
+      resolvedView = 'sitemap';
+    }
+
+    const targetPath = path || viewToPath(resolvedView);
+
+    if (resolvedView === 'services') {
+      setSelectedService(getServiceFromPath(targetPath));
+    }
+    if (resolvedView === 'accept') {
+      setSelectedCategory(getCategoryFromPath(targetPath));
+    }
+
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState(null, '', targetPath);
+    }
+
+    setCurrentView(resolvedView);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -106,8 +240,7 @@ export default function App() {
             <HeroSection
               onOpenPickupModal={() => handleOpenPickupModal()}
               onNavigateToServices={() => {
-                setCurrentView('services');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                handleNavigate('services', '/services');
               }}
             />
 
@@ -128,7 +261,7 @@ export default function App() {
 
             <ResidentialCorporateSection
               onOpenPickupModal={() => handleOpenPickupModal()}
-              onOpenCorporateEnquiry={() => setCurrentView('corporate')}
+              onOpenCorporateEnquiry={() => handleNavigate('corporate', '/corporate')}
             />
 
             <DataDestructionSection
@@ -137,15 +270,9 @@ export default function App() {
 
             <SustainabilitySection />
 
-            <PuneAreasSection
-              onSelectAreaForPickup={handleSelectAreaFromHome}
-            />
-
             <PuneSEOGuideSection
               onOpenPickupModal={handleOpenPickupModal}
             />
-
-            <FAQSection />
 
             <FinalCTASection
               onOpenPickupModal={() => handleOpenPickupModal()}
@@ -157,12 +284,15 @@ export default function App() {
           <ServicesView
             selectedService={selectedService}
             onOpenPickupModal={(category) => handleOpenPickupModal({ category })}
+            onNavigate={handleNavigate}
           />
         )}
 
         {currentView === 'accept' && (
           <WhatWeAcceptView
+            initialCategory={selectedCategory}
             onOpenPickupModal={(category) => handleOpenPickupModal({ category })}
+            onNavigate={handleNavigate}
           />
         )}
 
@@ -172,6 +302,13 @@ export default function App() {
 
         {currentView === 'contact' && (
           <ContactView />
+        )}
+
+        {currentView === 'sitemap' && (
+          <SitemapView
+            onNavigate={handleNavigate}
+            onOpenPickupModal={(category) => handleOpenPickupModal({ category })}
+          />
         )}
       </main>
 

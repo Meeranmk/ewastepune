@@ -57,7 +57,10 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
               key={service.id}
               className="bg-[#F5F5F0]/60 rounded-3xl p-7 border border-slate-200/90 hover:border-emerald-500/50 hover:shadow-xl transition-[border-color,box-shadow] duration-200 flex flex-col justify-between group"
             >
-              <div>
+              <div 
+                className="cursor-pointer"
+                onClick={() => onSelectService(service)}
+              >
                 {/* Icon & Category */}
                 <div className="flex items-center justify-between mb-5">
                   <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#2E7D32] to-[#1565C0] flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">

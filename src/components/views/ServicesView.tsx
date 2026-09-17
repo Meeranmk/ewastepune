@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Truck, 
   Banknote, 
@@ -8,20 +8,36 @@ import {
   Building2, 
   CheckCircle2, 
   ArrowRight,
-  HelpCircle,
   Clock,
-  Layers
+  Layers,
+  Wrench,
+  ShieldCheck
 } from 'lucide-react';
 import { SERVICES_DATA } from '../../data/servicesData';
 import { ServiceItem } from '../../types';
+import { SubpageHero } from './SubpageHero';
 
 interface ServicesViewProps {
   onOpenPickupModal: (category?: string) => void;
   selectedService?: ServiceItem | null;
+  onNavigate?: (path: string) => void;
 }
 
-export const ServicesView: React.FC<ServicesViewProps> = ({ onOpenPickupModal, selectedService }) => {
-  const [activeTab, setActiveTab] = useState<string>(selectedService ? selectedService.id : SERVICES_DATA[0].id);
+export const ServicesView: React.FC<ServicesViewProps> = ({ 
+  onOpenPickupModal, 
+  selectedService,
+  onNavigate
+}) => {
+  const [activeTab, setActiveTab] = useState<string>(
+    selectedService ? selectedService.id : SERVICES_DATA[0].id
+  );
+
+  // Keep in sync if selectedService prop changes
+  useEffect(() => {
+    if (selectedService) {
+      setActiveTab(selectedService.id);
+    }
+  }, [selectedService]);
 
   const currentService = SERVICES_DATA.find((s) => s.id === activeTab) || SERVICES_DATA[0];
 
@@ -38,57 +54,79 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onOpenPickupModal, s
   };
 
   return (
-    <div className="py-12 sm:py-16 bg-[#F5F5F0]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-emerald-50 text-[#2E7D32] border border-emerald-200 text-xs font-bold mb-3">
-            <span>Service Catalog • Pune & PCMC</span>
-          </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            E-Waste Recycling & Scrap Services
-          </h1>
-          <p className="text-base text-slate-600 mt-2">
-            Engineered for high material recovery, transparent pricing, and statutory compliance under E-Waste Rules 2022.
-          </p>
-        </div>
+    <div className="bg-[#F5F5F0] min-h-screen">
+      {/* Subpage Hero with Breadcrumbs & Fast CTAs */}
+      <SubpageHero
+        badge="Certified Pune E-Waste Services"
+        badgeIcon={<Recycle className="w-3.5 h-3.5" />}
+        title="E-Waste Recycling & Scrap Buying Services"
+        description="Scientific recycling, doorstep collection, physical data destruction, and maximum scrap cash payout across Pune and PCMC. Compliant with E-Waste Management Rules 2022."
+        breadcrumbs={[
+          { label: 'Home', href: '/', onClick: () => onNavigate?.('/') },
+          { label: 'Services' },
+        ]}
+        onOpenPickupModal={() => onOpenPickupModal(currentService.name)}
+        stats={[
+          { label: 'Pune Doorstep', value: 'Free Van' },
+          { label: 'Scrap Valuation', value: 'Top Market' },
+          { label: 'Data Destruction', value: 'Certified' },
+          { label: 'Green Recycled', value: '100%' },
+        ]}
+      />
 
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         {/* Services Navigation Sidebar + Detail Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left Navigation Pills */}
-          <div className="lg:col-span-4 space-y-2">
+          <div className="lg:col-span-4 space-y-2.5">
             <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block px-2 mb-2">
-              Select a Service:
+              Select a Recycling Service:
             </span>
             {SERVICES_DATA.map((srv) => {
               const isSelected = activeTab === srv.id;
               return (
                 <button
                   key={srv.id}
-                  onClick={() => setActiveTab(srv.id)}
-                  className={`w-full p-4 rounded-2xl text-left transition-[border-color,box-shadow,background-color] duration-200 flex items-center justify-between border ${
+                  type="button"
+                  onClick={() => {
+                    setActiveTab(srv.id);
+                    if (window.location.pathname !== `/services/${srv.slug}`) {
+                      window.history.replaceState(null, '', `/services/${srv.slug}`);
+                    }
+                  }}
+                  className={`w-full p-4 rounded-2xl text-left transition-[border-color,box-shadow,background-color] duration-200 flex items-center justify-between border cursor-pointer ${
                     isSelected
                       ? 'bg-white border-[#2E7D32] shadow-md ring-2 ring-emerald-500/20'
-                      : 'bg-white/80 border-slate-200 hover:bg-white hover:border-slate-300'
+                      : 'bg-white/90 border-slate-200 hover:bg-white hover:border-slate-300'
                   }`}
                 >
-                  <div className="flex items-center space-x-3">
-                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
-                      isSelected ? 'bg-[#2E7D32] text-white' : 'bg-slate-100 text-slate-700'
+                  <div className="flex items-center space-x-3 min-w-0">
+                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
+                      isSelected ? 'bg-[#2E7D32] text-white shadow-xs' : 'bg-slate-100 text-slate-700'
                     }`}>
                       {getIcon(srv.iconName)}
                     </div>
-                    <div>
-                      <h4 className="font-bold text-sm text-slate-900 leading-snug">{srv.name}</h4>
-                      <span className="text-[11px] text-slate-500 font-medium capitalize">{srv.category} service</span>
+                    <div className="min-w-0">
+                      <h3 className="font-bold text-sm text-slate-900 leading-snug truncate">{srv.name}</h3>
+                      <span className="text-[11px] text-slate-500 font-medium capitalize block">{srv.category} service</span>
                     </div>
                   </div>
-                  <ArrowRight className={`w-4 h-4 ${isSelected ? 'text-[#2E7D32]' : 'text-slate-300'}`} />
+                  <ArrowRight className={`w-4 h-4 shrink-0 ml-2 ${isSelected ? 'text-[#2E7D32]' : 'text-slate-300'}`} />
                 </button>
               );
             })}
+
+            {/* Quick Assurance Box */}
+            <div className="p-4 bg-emerald-50/80 rounded-2xl border border-emerald-200/80 text-xs space-y-2 mt-4">
+              <div className="flex items-center gap-2 font-bold text-emerald-950">
+                <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0" />
+                <span>Government & MPCB Compliant</span>
+              </div>
+              <p className="text-emerald-800 leading-relaxed">
+                We issue Green Recycling Certificates and Data Destruction Certificates for all corporate disposals.
+              </p>
+            </div>
           </div>
 
           {/* Right Service Detailed Profile */}
@@ -164,6 +202,7 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onOpenPickupModal, s
                 <span className="text-sm font-bold text-slate-900">Doorstep pickup available today or tomorrow</span>
               </div>
               <button
+                type="button"
                 onClick={() => onOpenPickupModal(currentService.name)}
                 className="w-full sm:w-auto px-7 py-3.5 bg-[#2E7D32] hover:bg-[#256629] text-white font-bold text-sm rounded-xl shadow-md hover:shadow-lg transition-colors flex items-center justify-center space-x-2 cursor-pointer"
               >

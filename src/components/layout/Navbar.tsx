@@ -11,7 +11,7 @@ import { SITE_CONFIG, getWhatsAppLink } from '../../data/siteConfig';
 
 interface NavbarProps {
   currentView: string;
-  onNavigate: (view: string) => void;
+  onNavigate: (view: string, path?: string) => void;
   onOpenPickupModal: () => void;
 }
 
@@ -22,17 +22,17 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const handleNavClick = (view: string) => {
-    onNavigate(view);
+  const handleNavClick = (view: string, path?: string) => {
+    onNavigate(view, path);
     setMobileMenuOpen(false);
   };
 
   const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'services', label: 'Services' },
-    { id: 'what-we-accept', label: 'What We Accept' },
-    { id: 'corporate', label: 'Corporate ITAD' },
-    { id: 'contact', label: 'Contact Us' },
+    { id: 'home', label: 'Home', path: '/' },
+    { id: 'services', label: 'Services', path: '/services' },
+    { id: 'what-we-accept', label: 'What We Accept', path: '/what-we-accept' },
+    { id: 'corporate', label: 'Corporate ITAD', path: '/corporate' },
+    { id: 'contact', label: 'Contact Us', path: '/contact' },
   ];
 
   const isItemActive = (id: string) => {
@@ -76,9 +76,14 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-4">
           {/* Brand Logo */}
-          <button 
-            type="button"
-            onClick={() => handleNavClick('home')}
+          <a 
+            href="/"
+            onClick={(e) => {
+              if (!e.metaKey && !e.ctrlKey) {
+                e.preventDefault();
+                handleNavClick('home', '/');
+              }
+            }}
             className="text-left cursor-pointer flex items-center gap-2 sm:gap-2.5 shrink-0 group select-none py-1 border-0 bg-transparent focus:outline-hidden"
             aria-label="Go to Home"
           >
@@ -97,24 +102,30 @@ export const Navbar: React.FC<NavbarProps> = ({
                 Certified Scrap Buyers & Doorstep Recycling
               </p>
             </div>
-          </button>
+          </a>
 
-          {/* Desktop Navigation Links (5 Clean Links) */}
-          <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2 shrink-0">
+          {/* Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center space-x-1 xl:space-x-1.5 shrink-0">
             {navItems.map((item) => {
               const active = isItemActive(item.id);
               return (
-                <button
+                <a
                   key={item.id}
-                  onClick={() => handleNavClick(item.id)}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+                  href={item.path}
+                  onClick={(e) => {
+                    if (!e.metaKey && !e.ctrlKey) {
+                      e.preventDefault();
+                      handleNavClick(item.id, item.path);
+                    }
+                  }}
+                  className={`px-2.5 py-1.5 xl:px-3 xl:py-2 rounded-lg text-xs xl:text-sm font-medium transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                     active
                       ? 'text-[#2E7D32] bg-emerald-50 font-semibold shadow-2xs'
                       : 'text-slate-700 hover:text-[#1565C0] hover:bg-slate-50'
                   }`}
                 >
                   {item.label}
-                </button>
+                </a>
               );
             })}
           </nav>
@@ -214,9 +225,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             {navItems.map((item) => {
               const active = isItemActive(item.id);
               return (
-                <button
+                <a
                   key={item.id}
-                  onClick={() => handleNavClick(item.id)}
+                  href={item.path}
+                  onClick={(e) => {
+                    if (!e.metaKey && !e.ctrlKey) {
+                      e.preventDefault();
+                      handleNavClick(item.id, item.path);
+                    }
+                  }}
                   className={`w-full text-left px-3.5 py-2.5 rounded-lg text-sm font-semibold flex items-center justify-between transition-colors cursor-pointer ${
                     active
                       ? 'text-[#2E7D32] bg-emerald-50 border-l-4 border-[#2E7D32]'
@@ -224,7 +241,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   }`}
                 >
                   <span>{item.label}</span>
-                </button>
+                </a>
               );
             })}
           </nav>

@@ -12,24 +12,35 @@ import {
   Cpu, 
   Search, 
   CheckCircle2, 
-  XCircle, 
   ArrowRight,
   Sparkles,
-  HelpCircle,
   Truck,
   ShieldCheck
 } from 'lucide-react';
 import { ACCEPTED_ITEMS_DATA } from '../../data/acceptedItemsData';
+import { SubpageHero } from './SubpageHero';
 
 interface WhatWeAcceptViewProps {
   onOpenPickupModal: (category?: string) => void;
+  onNavigate?: (path: string) => void;
+  initialCategory?: string;
 }
 
 export const WhatWeAcceptView: React.FC<WhatWeAcceptViewProps> = ({ 
-  onOpenPickupModal
+  onOpenPickupModal,
+  onNavigate,
+  initialCategory
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategoryId, setSelectedCategoryId] = useState<string>('all');
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string>(
+    initialCategory || 'all'
+  );
+
+  React.useEffect(() => {
+    if (initialCategory) {
+      setSelectedCategoryId(initialCategory);
+    }
+  }, [initialCategory]);
 
   const filteredCategories = ACCEPTED_ITEMS_DATA.filter(cat => {
     const matchesCat = selectedCategoryId === 'all' || cat.id === selectedCategoryId;
@@ -40,22 +51,27 @@ export const WhatWeAcceptView: React.FC<WhatWeAcceptViewProps> = ({
   });
 
   return (
-    <div className="py-12 sm:py-16 bg-[#F5F5F0]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-emerald-50 text-[#2E7D32] border border-emerald-200 text-xs font-bold mb-3">
-            <span>Accepted Electronics Catalog • Pune</span>
-          </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            What E-Waste We Buy & Recycle in Pune
-          </h1>
-          <p className="text-base text-slate-600 mt-2">
-            Working, broken, obsolete, or completely burnt out. Browse our accepted items with certified doorstep pickup and instant scrap valuation.
-          </p>
-        </div>
+    <div className="bg-[#F5F5F0] min-h-screen">
+      {/* Subpage Hero */}
+      <SubpageHero
+        badge="Accepted Electronics Catalog"
+        badgeIcon={<Sparkles className="w-3.5 h-3.5" />}
+        title="What E-Waste We Buy & Recycle in Pune"
+        description="Working, damaged, obsolete, or decommissioned electronics. Browse our accepted items catalog with doorstep pickup, accurate electronic weighing, and instant scrap valuation."
+        breadcrumbs={[
+          { label: 'Home', href: '/', onClick: () => onNavigate?.('/') },
+          { label: 'What We Accept' },
+        ]}
+        onOpenPickupModal={() => onOpenPickupModal()}
+        stats={[
+          { label: 'Accepted Items', value: '100+' },
+          { label: 'Doorstep Pickup', value: 'All Pune' },
+          { label: 'Weight Scales', value: 'Certified' },
+          { label: 'Scrap Valuation', value: 'Instant' },
+        ]}
+      />
 
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         {/* Search & Filter Bar */}
         <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-xs mb-10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="relative w-full sm:w-80">
@@ -75,8 +91,9 @@ export const WhatWeAcceptView: React.FC<WhatWeAcceptViewProps> = ({
 
           <div className="flex items-center space-x-2 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0 scrollbar-none">
             <button
+              type="button"
               onClick={() => setSelectedCategoryId('all')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-colors ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-colors cursor-pointer ${
                 selectedCategoryId === 'all'
                   ? 'bg-[#2E7D32] text-white'
                   : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
@@ -84,11 +101,12 @@ export const WhatWeAcceptView: React.FC<WhatWeAcceptViewProps> = ({
             >
               All Categories
             </button>
-            {ACCEPTED_ITEMS_DATA.slice(0, 5).map(cat => (
+            {ACCEPTED_ITEMS_DATA.map((cat) => (
               <button
                 key={cat.id}
+                type="button"
                 onClick={() => setSelectedCategoryId(cat.id)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-colors ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-colors cursor-pointer ${
                   selectedCategoryId === cat.id
                     ? 'bg-[#2E7D32] text-white'
                     : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
@@ -100,23 +118,22 @@ export const WhatWeAcceptView: React.FC<WhatWeAcceptViewProps> = ({
           </div>
         </div>
 
-        {/* Category Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        {/* Catalog Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredCategories.map((cat) => (
-            <div
+            <div 
               key={cat.id}
-              className="bg-white rounded-3xl p-6 border border-slate-200 shadow-xs hover:border-emerald-400 hover:shadow-md transition-[border-color,box-shadow] duration-200 flex flex-col justify-between group"
+              className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between"
             >
               <div>
-                {/* Visual Category Photo */}
-                <div className="h-44 sm:h-48 rounded-2xl overflow-hidden mb-4 relative border border-slate-100 shadow-2xs">
-                  <img
-                    src={cat.imageUrl}
+                <div className="relative h-44 rounded-2xl overflow-hidden mb-5 bg-slate-100">
+                  <img 
+                    src={cat.imageUrl} 
                     alt={cat.name}
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
                     onError={(e) => {
-                      (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80';
+                      (e.target as HTMLElement).style.display = 'none';
                     }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
@@ -156,6 +173,7 @@ export const WhatWeAcceptView: React.FC<WhatWeAcceptViewProps> = ({
 
               <div className="space-y-2 pt-2 border-t border-slate-100">
                 <button
+                  type="button"
                   onClick={() => onOpenPickupModal(cat.name)}
                   className="w-full py-2.5 px-3 bg-slate-900 hover:bg-[#2E7D32] text-white text-xs font-bold rounded-xl transition-colors flex items-center justify-center space-x-1.5 cursor-pointer"
                 >
